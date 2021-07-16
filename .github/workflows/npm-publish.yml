@@ -23,7 +23,6 @@ jobs:
       - name: Archive build
         run: |
           zip --junk-paths ui-driver-nutanix dist/*
-
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1

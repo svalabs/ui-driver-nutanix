@@ -26,7 +26,7 @@ export default Ember.Component.extend(NodeDriver, {
   driverName: '%%DRIVERNAME%%',
   config:     alias('model.%%DRIVERNAME%%Config'),
   app:        service(),
-  needLogin: true,
+
   init() {
     // This does on the fly template compiling, if you mess with this :cry:
     const decodedLayout = window.atob(LAYOUT);
@@ -36,6 +36,7 @@ export default Ember.Component.extend(NodeDriver, {
     set(this,'layout', template);
 
     this._super(...arguments);
+
   },
   /*!!!!!!!!!!!DO NOT CHANGE END!!!!!!!!!!!*/
 
@@ -50,8 +51,9 @@ export default Ember.Component.extend(NodeDriver, {
       vmMem: 1024,
       vmImage: "docker-img",
       vmNetwork: "default",
-
-
+      vmGroup: "",
+      cluster: "",
+      insecure: true
     });
 
     set(this, 'model.%%DRIVERNAME%%Config', config);

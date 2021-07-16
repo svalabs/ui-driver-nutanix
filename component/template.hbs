@@ -1,5 +1,4 @@
 <section class="horizontal-form">
-  {{#if needLogin}}
   <div class="container-fluid">
     {{!-- This partial contains the quantity, name, and description fields --}}
 
@@ -20,7 +19,7 @@
 
       </div>
       <div class="col-sm-12 col-md-4">
-        <p class="form-control-static help-block">Nutanix management endpoint ip address/FQDN:9440</p>
+        <p class="form-control-static help-block">Nutanix management endpoint IP address</p>
       </div>
     </div>
 
@@ -54,19 +53,29 @@
       </div>
     </div>
 
-    {{top-errors errors=errors}}
-    <div class="footer-actions">
-      {{#if gettingData}}
-        <button class="btn bg-primary btn-disabled">
-          <i class="icon icon-spinner icon-spin"></i> {{t 'generic.loading'}}</button>
-      {{else}}
-        <button {{action "getData" }} class="btn bg-primary">Configure Server</button>
-      {{/if}}
-      <button {{action "cancel"}} class="btn bg-transparent">{{t 'generic.cancel'}}</button>
+    <div class="row">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">Cluster</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text"
+        class="form-control"
+        value=model.%%DRIVERNAME%%Config.cluster
+        }}
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <p class="form-control-static help-block">The name of the cluster.</p>
+      </div>
     </div>
-  </div>
-  {{ else }}
-  <div class="container-fluid">
+
+    <div class="col-md-2">
+      <div class="checkbox">
+        <label class="acc-label">{{input type="checkbox" checked=model.%%DRIVERNAME%%Config.insecure}}
+          Allow insecure communication to the endpoint
+        </label>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-md-2 form-label">
         <label class="form-control-static">vCPU</label>
@@ -132,7 +141,7 @@
 
     <div class="row">
       <div class="col-md-2 form-label">
-        <label class="form-control-static">VM Network</label>
+        <label class="form-control-static">VM Network(s)</label>
       </div>
       <div class="col-md-4">
         {{input type="text"
@@ -141,7 +150,23 @@
           }}
       </div>
       <div class="col-sm-12 col-md-4">
-        <p class="form-control-static help-block">The name of the network to attach to the newly created VM</p>
+        <p class="form-control-static help-block">The name of the network to attach to the newly created VM. Separate multiple networks by ",".</p>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-2 form-label">
+        <label class="form-control-static">VM Group(s)</label>
+      </div>
+      <div class="col-md-4">
+        {{input type="text"
+        class="form-control"
+        value=model.%%DRIVERNAME%%Config.vmGroup
+        }}
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <p class="form-control-static help-block">The name of the group to attach to the newly created VM. Separate multiple groups by ",".</p>
       </div>
     </div>
 
@@ -172,5 +197,4 @@
     {{!-- This component shows the Create and Cancel buttons --}}
     {{save-cancel save="save" cancel=(action "cancel")}}
   </div>
-  {{/if}}
 </section>
