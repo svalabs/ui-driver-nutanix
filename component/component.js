@@ -26,7 +26,7 @@ export default Ember.Component.extend(NodeDriver, {
   driverName: '%%DRIVERNAME%%',
   config:     alias('model.%%DRIVERNAME%%Config'),
   app:        service(),
-  needLogin: true,
+
   init() {
     // This does on the fly template compiling, if you mess with this :cry:
     const decodedLayout = window.atob(LAYOUT);
@@ -36,24 +36,10 @@ export default Ember.Component.extend(NodeDriver, {
     set(this,'layout', template);
 
     this._super(...arguments);
+
   },
   /*!!!!!!!!!!!DO NOT CHANGE END!!!!!!!!!!!*/
-  actions: {
-    getData() {
-      this.set('gettingData', true);
-      let that = this;
-      that.apiRequest(
-        "/api/nutanix/v3/groups",
-        '{"entity_type":"category","grouping_attribute":"abac_category_key","group_sort_attribute":"name","group_count":64,"group_attributes":[{"attribute":"name","ancestor_entity_type":"abac_category_key"},{"attribute":"immutable","ancestor_entity_type":"abac_category_key"},{"attribute":"cardinality","ancestor_entity_type":"abac_category_key"},{"attribute":"description","ancestor_entity_type":"abac_category_key"}],"group_member_count":1000,"group_member_offset":0,"group_member_sort_attribute":"value","group_member_attributes":[{"attribute":"name"},{"attribute":"value"},{"attribute":"description"},{"attribute":"immutable"},{"attribute":"cardinality"}],"query_name":"prism:CategoriesQueryModel","filter_criteria":"name==.*,value==.*"}'
-      ).then((res) => {
-        this.set('gettingData', false);
-        console.log(res);
-      }).catch(err => {
-        this.set('gettingData', false);
-        console.log(err);
-      });
-    }
-  },
+
   // Write your component here, starting with setting 'model' to a machine with your config populated
   bootstrap: function() {
     // bootstrap is called by rancher ui on 'init', you're better off doing your setup here rather then the init function to ensure everything is setup correctly
@@ -65,26 +51,13 @@ export default Ember.Component.extend(NodeDriver, {
       vmMem: 1024,
       vmImage: "docker-img",
       vmNetwork: "default",
+      vmGroups: ""
+
     });
 
     set(this, 'model.%%DRIVERNAME%%Config', config);
   },
-  apiRequest(path, data) {
-    const apiUrl = this.get('model.%%DRIVERNAME%%Config.endpoint');
-    const apiUser = this.get('model.%%DRIVERNAME%%Config.username');
-    const apiPassword = this.get('model.%%DRIVERNAME%%Config.password');
 
-    const apiAuth = btoa(apiUser + ":" + apiPassword);
-
-    return fetch(apiUrl + path, {
-      method: (!!data) ? "POST" : undefined,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + apiAuth,
-      },
-      body: data
-    }).then(res => res.ok ? res.json() : Promise.reject(res.json()));
-  },
   // Add custom validation beyond what can be done from the config API schema
   validate() {
     // Get generic API validation errors
