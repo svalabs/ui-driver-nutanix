@@ -1,4 +1,5 @@
 <section class="horizontal-form">
+  {{#if needLogin}}
   <div class="container-fluid">
     {{!-- This partial contains the quantity, name, and description fields --}}
 
@@ -53,6 +54,20 @@
       </div>
     </div>
 
+    {{top-errors errors=errors}}
+    <div class="footer-actions">
+      {{#if gettingData}}
+        <button class="btn bg-primary btn-disabled">
+          <i class="icon icon-spinner icon-spin"></i> {{t 'generic.loading'}}</button>
+      {{else}}
+        <button {{action "getData" }} class="btn bg-primary">Configure Server</button>
+      {{/if}}
+      <button {{action "cancel"}} class="btn bg-transparent">{{t 'generic.cancel'}}</button>
+    </div>
+  {{else}}
+  </div>
+
+    <div class="container-fluid">
     <div class="row">
       <div class="col-md-2 form-label">
         <label class="form-control-static">vCPU</label>
@@ -158,4 +173,5 @@
     {{!-- This component shows the Create and Cancel buttons --}}
     {{save-cancel save="save" cancel=(action "cancel")}}
   </div>
+  {{/if}}
 </section>
