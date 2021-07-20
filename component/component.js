@@ -52,7 +52,8 @@ export default Ember.Component.extend(NodeDriver, {
       vmImage: "docker-img",
       vmNetwork: "default",
       vmGroup: "",
-      cluster: ""
+      cluster: "",
+      insecure: true
     });
 
     set(this, 'model.%%DRIVERNAME%%Config', config);
