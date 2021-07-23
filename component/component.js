@@ -53,7 +53,9 @@ export default Ember.Component.extend(NodeDriver, {
       vmNetwork: "default",
       vmGroup: "",
       cluster: "",
-      insecure: true
+      insecure: true,
+      storageContainer: "",
+      diskSize: 0
     });
 
     set(this, 'model.%%DRIVERNAME%%Config', config);

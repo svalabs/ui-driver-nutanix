@@ -1,15 +1,18 @@
-# ui-driver-skel
-Skeleton Rancher UI driver for custom docker-machine drivers
+# ui-driver-nutanix
+Rancher UI driver for the [nutanix docker-machine](https://github.com/nutanix/docker-machine) driver 
 
-**Note: The Master branch works with Rancher 2.x+, if you are building a custom driver for Rancher 1.x use the 1.x branch**
+## Usage
 
-## Setup
+* Add a Machine Driver in Rancher 2 (`Tools` -> `Drivers` -> `Node Drivers`)
 
-* Fork this repository into your own account as `ui-driver-DRIVERNAME`
-  * DRIVERNAME should be the name of the driver that you would give to `docker-machine create --driver`, e.g. "mycompany", "digitalocean", "vultr", etc.
-* Update the "name" in package.json to match
-  * You should also update description, URLs, etc, but these aren't strictly required.
-* `npm install`
+| Key | Value |
+| --- | ----- |
+| Download URL | `TBD` |
+| Custom UI URL | `TBD` |
+| Whitelist Domains |  `TBD` |
+
+* Wait for the driver to become "Active"
+* Go to Clusters -> Add Cluster, your driver and custom UI should show up.
 
 ## Development
 
@@ -31,8 +34,7 @@ For other users to see your driver, you need to build it and host the output on 
 ## Using
 
 * Add a Machine Driver in Rancher 2.0 (Global -> Node Drivers)
-  * Name: Your `DRIVERNAME` (see above).
-  * Download URL: The URL for the driver binary (e.g. `https://github.com/mycompany/docker-machine-mycompany/releases/download/v1.0.0/docker-machine-driver-mycompany-v1.0.0-linux-amd64.tar.gz`)
-  * Custom UI URL: The URL you uploaded the `dist` folder to, e.g. `https://github.com/mycompany/ui-driver-mycompany/releases/download/v1.0.0/component.js`)
+  * Download URL: The URL for the driver binary (e.g. `https://github.com/nutanix/docker-machine/releases/download/v3.0.0-beta6/docker-machine-driver-nutanix_v3.0.0-beta6_linux`)
+  * Custom UI URL: The URL you uploaded the `dist` folder to, e.g. `TBD`)
 * Wait for the driver to become "Active"
 * Go to Clusters -> Add Cluster, your driver and custom UI should show up.

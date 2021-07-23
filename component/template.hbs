@@ -11,12 +11,10 @@
         <label class="form-control-static">Management Endpoint</label>
       </div>
       <div class="col-sm-12 col-md-4">
-
         {{input type="text"
             class="form-control"
             value=model.%%DRIVERNAME%%Config.endpoint
           }}
-
       </div>
       <div class="col-sm-12 col-md-4">
         <p class="form-control-static help-block">Nutanix management endpoint IP address</p>
@@ -157,7 +155,7 @@
 
     <div class="row">
       <div class="col-md-2 form-label">
-        <label class="form-control-static">VM Group(s)</label>
+        <label class="form-control-static">VM Categories</label>
       </div>
       <div class="col-md-4">
         {{input type="text"
@@ -170,6 +168,42 @@
       </div>
     </div>
 
+
+    <div class="row">
+      <div class="col-sm-12 col-md-2 form-label">
+        <label class="form-control-static">Storage Container</label>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        {{input type="text"
+        class="form-control"
+        value=model.%%DRIVERNAME%%Config.storageContainer
+        }}
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <p class="form-control-static help-block">
+          UUID of the storage container to be used for the additional disk.
+          Leave empty if you don't want to provision an extra disk.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-2 form-label">
+        <label class="form-control-static">Disk Size (GiB)</label>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        {{input type="text"
+        class="form-control"
+        value=model.%%DRIVERNAME%%Config.diskSize
+        }}
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <p class="form-control-static help-block">
+          Size of the additional disk to be provisioned in GiB.
+          Set this to zero if you don't want to provision an extra disk.
+        </p>
+      </div>
+    </div>
 
     {{!-- This following contains the Name, Labels and Engine Options fields --}}
     <div class="over-hr"><span>{{templateOptionsTitle}}</span></div>
