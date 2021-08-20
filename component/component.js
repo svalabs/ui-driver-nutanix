@@ -51,11 +51,12 @@ export default Ember.Component.extend(NodeDriver, {
       vmMem: 1024,
       vmImage: "docker-img",
       vmNetwork: "default",
-      vmGroup: "",
+      vmCategories: "",
       cluster: "",
       insecure: true,
       storageContainer: "",
-      diskSize: 0
+      vmImageSize: 0,
+      cpuPassthrough: false
     });
 
     set(this, 'model.%%DRIVERNAME%%Config', config);
